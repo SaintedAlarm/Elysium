@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour
 {
-
+    public Interactable focus;
     public LayerMask movementMask;
 
     Camera cam;
@@ -17,7 +18,6 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("PlayerController: No camera tagged MainCamera found!");
         }
     }
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
             {
                 motor.MoveToPoint(hit.point);
 
-                // Stop focusing any object
+                RemoveFocus();
             }
         }
         if (Input.GetMouseButtonDown(1))
@@ -41,10 +41,22 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                // Check if we hit an interactable
-                // If we did set it as the focus
- 
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
+
+
+                if (interactable != null) 
+                {
+                    SetFocus(interactable);
+                }
             }
+        }
+        void SetFocus (Interactable newFocus)
+        {
+            focus = newFocus;
+        }
+        void RemoveFocus()
+        {
+            focus = null;
         }
     } 
 }

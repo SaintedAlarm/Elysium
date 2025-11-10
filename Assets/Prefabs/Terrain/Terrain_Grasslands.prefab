@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2494007898170928643}
   - component: {fileID: 916615784863820181}
   - component: {fileID: 1876644684216702160}
-  m_Layer: 0
+  - component: {fileID: 4246187686393124147}
+  m_Layer: 8
   m_Name: Terrain_Grasslands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,3 +107,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d268b1278e1904c93f032b04a75d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4246187686393124147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7817368689651802120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.13333334
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0

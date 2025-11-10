@@ -97,6 +97,11 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+<<<<<<< HEAD
 
 # Ignore all imported or downloaded Unity asset packages
 /Assets/Unity Asset Packages/
+=======
+# removes Assets bought or found on the asset store
+/Assets/Unity Asset Packages/
+>>>>>>> Terrain

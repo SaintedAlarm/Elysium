@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
+[RequireComponent(typeof(PlayerAttack))]
 public class PlayerController : MonoBehaviour
 {
     public Interactable focus;
@@ -8,11 +9,13 @@ public class PlayerController : MonoBehaviour
 
     Camera cam;
     PlayerMotor motor;
+    PlayerAttack attack;
 
     void Start()
     {
         cam = Camera.main;
         motor = GetComponent<PlayerMotor>();
+        attack = GetComponent<PlayerAttack>();
 
         if (cam == null)
         {
@@ -35,7 +38,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // RIGHT CLICK: focus interactable
+        // RIGHT CLICK: interact OR attack
         if (Input.GetMouseButtonDown(1))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -43,11 +46,20 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100f))
             {
+                // 1) Try interactable first (items, NPCs, etc.)
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
 
                 if (interactable != null)
                 {
                     SetFocus(interactable);
+                    return;
+                }
+
+                // 2) If not interactable, try attacking something with Health
+                Health targetHealth = hit.collider.GetComponentInParent<Health>();
+                if (targetHealth != null)
+                {
+                    attack.AttackTarget(targetHealth);
                 }
             }
         }

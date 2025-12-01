@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-// RIGHT CLICK: interact ONLY
+// RIGHT CLICK: interact OR lock-on target
 if (Input.GetMouseButtonDown(1))
 {
     Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -46,19 +46,32 @@ if (Input.GetMouseButtonDown(1))
 
     if (Physics.Raycast(ray, out hit, 100f))
     {
+        // 1) Try interactable first
         Interactable interactable = hit.collider.GetComponent<Interactable>();
 
         if (interactable != null)
         {
             SetFocus(interactable);
+            attack.ClearTarget();   // stop targeting enemies when interacting
+            return;
         }
-        else
+
+        // 2) If no interactable, try locking onto an enemy (Health)
+        Health targetHealth = hit.collider.GetComponentInParent<Health>();
+        if (targetHealth != null)
         {
-            // clicked on nothing interactable: clear focus
-            RemoveFocus();
+            RemoveFocus();                  // stop following interactables
+            motor.StopFollowingTarget();    // stay where you are
+            attack.SetTarget(targetHealth); // LOCK ON
+            return;
         }
+
+        // 3) Clicked on nothing interesting: clear both
+        RemoveFocus();
+        attack.ClearTarget();
     }
 }
+
 
 
     void SetFocus(Interactable newFocus)

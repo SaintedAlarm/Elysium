@@ -5,6 +5,7 @@ public class Health : MonoBehaviour
 {
     [Header("Health Settings")]
     public float maxHealth = 100f;
+    public FloatData startingHealthData;  // <-- ADDED
 
     [SerializeField] private float currentHealth;
     public bool IsDead { get; private set; }
@@ -14,7 +15,7 @@ public class Health : MonoBehaviour
     public UnityEvent<float> onHealthChanged01; // 0–1 for UI sliders
 
     [Header("Death Behavior")]
-    public bool destroyOnDeath = true; // enemies: true, player: false (usually)
+    public bool destroyOnDeath = true;
     public bool disableOnDeath = false;
 
     void Awake()
@@ -25,6 +26,13 @@ public class Health : MonoBehaviour
     public void ResetHealth()
     {
         IsDead = false;
+
+        // <-- ADDED THIS BLOCK
+        if (startingHealthData != null)
+        {
+            maxHealth = startingHealthData.value;
+        }
+
         currentHealth = maxHealth;
         onHealthChanged01?.Invoke(currentHealth / maxHealth);
     }

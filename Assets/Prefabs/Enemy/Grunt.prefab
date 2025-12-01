@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 4243532552958332578}
   - component: {fileID: 7435201876380310872}
   - component: {fileID: -9116460787901681758}
+  - component: {fileID: 2277732594237661770}
   m_Layer: 0
   m_Name: Grunt
   m_TagString: Untagged
@@ -161,10 +162,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 10
+  startingHealthData: {fileID: 0}
   currentHealth: 0
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: a12f8c8d0d011984b8bb81bcd172a00c, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHealthChanged01:
     m_PersistentCalls:
       m_Calls: []
@@ -272,10 +286,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GruntEnemyAI
   moveSpeed: 3.5
   aggroRange: 5
-  loseAggroRange: 10
   attackRange: 2
+  damageToPlayer: 5
   attackCooldown: 1.5
-  baseDamageToPlayer: 5
-  damageType: 0
   damageToGoal: 10
   destroyOnHitGoal: 1
+--- !u!114 &2277732594237661770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924727399356320896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d2827acc32591b46ab8ae0666ae3a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDeathReporter

@@ -38,32 +38,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // RIGHT CLICK: interact OR attack
-        if (Input.GetMouseButtonDown(1))
+// RIGHT CLICK: interact ONLY
+if (Input.GetMouseButtonDown(1))
+{
+    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+    RaycastHit hit;
+
+    if (Physics.Raycast(ray, out hit, 100f))
+    {
+        Interactable interactable = hit.collider.GetComponent<Interactable>();
+
+        if (interactable != null)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100f))
-            {
-                // 1) Try interactable first (items, NPCs, etc.)
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-
-                if (interactable != null)
-                {
-                    SetFocus(interactable);
-                    return;
-                }
-
-                // 2) If not interactable, try attacking something with Health
-                Health targetHealth = hit.collider.GetComponentInParent<Health>();
-                if (targetHealth != null)
-                {
-                    attack.AttackTarget(targetHealth);
-                }
-            }
+            SetFocus(interactable);
+        }
+        else
+        {
+            // clicked on nothing interactable: clear focus
+            RemoveFocus();
         }
     }
+}
+
 
     void SetFocus(Interactable newFocus)
     {
@@ -89,5 +85,6 @@ public class PlayerController : MonoBehaviour
             focus = null;
         }
         motor.StopFollowingTarget();
+    }
     }
 }
